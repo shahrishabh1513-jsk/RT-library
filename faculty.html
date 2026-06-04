@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - RT Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/faculty.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="logo"><img src="assets/image/RT_LOGO_1.png" alt="RT Library">
+                    <h1><i class="fas fa-chalkboard-teacher"></i> Faculty Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">DR</div>
+                    <div class="user-details"><span class="user-name" id="userName">Dr. Robert Smith</span><span
+                            class="user-id" id="userId">F001</span></div><button class="logout-btn"
+                        onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </header>
+        <div class="main-content">
+            <aside class="sidebar">
+                <button class="nav-btn active" data-tab="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
+                <button class="nav-btn" data-tab="my-books"><i class="fas fa-book"></i> My Books</button>
+                <button class="nav-btn" data-tab="available-books"><i class="fas fa-search"></i> Browse Books</button>
+                <button class="nav-btn" data-tab="research"><i class="fas fa-flask"></i> Research</button>
+                <button class="nav-btn" data-tab="profile"><i class="fas fa-user"></i> Profile</button>
+            </aside>
+            <main class="content-area">
+                <section id="dashboard" class="active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="card"><i class="fas fa-book"></i>
+                            <h3>Currently Borrowed</h3>
+                            <div class="value" id="borrowedCount">0</div>
+                        </div>
+                        <div class="card"><i class="fas fa-clock"></i>
+                            <h3>Overdue Books</h3>
+                            <div class="value" id="overdueCount">0</div>
+                        </div>
+                        <div class="card"><i class="fas fa-calendar-check"></i>
+                            <h3>Research Credits</h3>
+                            <div class="value">150</div>
+                        </div>
+                        <div class="card"><i class="fas fa-graduation-cap"></i>
+                            <h3>Faculty Status</h3>
+                            <div class="value">Active</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2><i class="fas fa-fire"></i> Recommended Research Materials</h2>
+                        <div class="books-grid" id="recommendedGrid"></div>
+                    </div>
+                </section>
+                <section id="my-books">
+                    <h2>My Borrowed Books</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Borrowed Date</th>
+                                    <th>Due Date (90 days)</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="borrowedTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="available-books">
+                    <h2>Browse Available Books</h2>
+                    <div class="search-container"><input type="text" id="searchInput" placeholder="Search..."><select
+                            id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="computer-science">Computer Science</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="literature">Literature</option>
+                            <option value="history">History</option>
+                            <option value="biology">Biology</option>
+                        </select><button onclick="searchBooks()"><i class="fas fa-search"></i> Search</button></div>
+                    <div class="books-grid" id="booksGrid"></div>
+                </section>
+                <section id="research">
+                    <h2><i class="fas fa-flask"></i> Research Resources</h2>
+                    <div class="research-grid">
+                        <div class="research-card"><i class="fas fa-file-alt"></i>
+                            <h3>Academic Journals</h3>
+                            <p>Access to 500+ peer-reviewed journals</p>
+                        </div>
+                        <div class="research-card"><i class="fas fa-database"></i>
+                            <h3>Research Databases</h3>
+                            <p>IEEE, Springer, ScienceDirect access</p>
+                        </div>
+                        <div class="research-card"><i class="fas fa-tools"></i>
+                            <h3>Citation Tools</h3>
+                            <p>BibTeX, EndNote, Mendeley support</p>
+                        </div>
+                    </div>
+                </section>
+                <section id="profile">
+                    <h2>My Profile</h2>
+                    <div class="profile-card" id="profileCard"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/faculty.js"></script>
+</body>
+
+</html>

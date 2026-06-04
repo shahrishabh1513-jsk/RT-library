@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - RT Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="logo"><img src="assets/image/RT_LOGO_1.png" alt="RT Library">
+                    <h1><i class="fas fa-user-cog"></i> Admin Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">AD</div>
+                    <div><span class="user-name" id="userName">Administrator</span><span class="user-id"
+                            id="userId">admin</span></div><button class="logout-btn" onclick="logout()"><i
+                            class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </header>
+        <div class="main-content">
+            <aside class="sidebar">
+                <button class="nav-btn active" data-tab="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
+                <button class="nav-btn" data-tab="books"><i class="fas fa-book"></i> Manage Books</button>
+                <button class="nav-btn" data-tab="users"><i class="fas fa-users"></i> Manage Users</button>
+                <button class="nav-btn" data-tab="transactions"><i class="fas fa-exchange-alt"></i>
+                    Transactions</button>
+                <button class="nav-btn" data-tab="qr"><i class="fas fa-qrcode"></i> Generate QR</button>
+            </aside>
+            <main class="content-area">
+                <section id="dashboard" class="active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="card"><i class="fas fa-book"></i>
+                            <h3>Total Books</h3>
+                            <div class="value" id="totalBooks">60</div>
+                        </div>
+                        <div class="card"><i class="fas fa-users"></i>
+                            <h3>Total Students</h3>
+                            <div class="value" id="totalStudents">2</div>
+                        </div>
+                        <div class="card"><i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Total Faculty</h3>
+                            <div class="value" id="totalFaculty">1</div>
+                        </div>
+                        <div class="card"><i class="fas fa-exchange-alt"></i>
+                            <h3>Active Borrowings</h3>
+                            <div class="value" id="activeBorrowings">0</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>Recent Transactions</h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Book</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentTransactions"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section id="books">
+                    <h2>Manage Books</h2>
+                    <div class="form-container">
+                        <h3>Add New Book</h3>
+                        <form id="addBookForm">
+                            <div class="form-grid"><input type="text" id="bookTitle" placeholder="Book Title"
+                                    required><input type="text" id="bookAuthor" placeholder="Author" required><input
+                                    type="text" id="bookISBN" placeholder="ISBN" required><input type="number"
+                                    id="bookCopies" placeholder="Number of Copies" value="1" min="1"><select
+                                    id="bookCategory">
+                                    <option value="computer-science">Computer Science</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="physics">Physics</option>
+                                    <option value="literature">Literature</option>
+                                    <option value="history">History</option>
+                                    <option value="biology">Biology</option>
+                                </select></div><button type="submit" class="btn-primary">Add Book</button>
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>ISBN</th>
+                                    <th>Category</th>
+                                    <th>Available</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="booksTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="users">
+                    <h2>Manage Users</h2>
+                    <div class="form-container">
+                        <h3>Add New Student</h3>
+                        <form id="addStudentForm">
+                            <div class="form-grid"><input type="text" id="studentId" placeholder="Student ID"
+                                    required><input type="text" id="studentName" placeholder="Full Name" required><input
+                                    type="email" id="studentEmail" placeholder="Email" required><select
+                                    id="studentCourse">
+                                    <option>Computer Science</option>
+                                    <option>Information Technology</option>
+                                    <option>Mathematics</option>
+                                    <option>Physics</option>
+                                </select><select id="studentYear">
+                                    <option>1st Year</option>
+                                    <option>2nd Year</option>
+                                    <option>3rd Year</option>
+                                    <option>4th Year</option>
+                                </select></div><button type="submit" class="btn-primary">Add Student</button>
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <h3>Students</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="transactions">
+                    <h2>All Transactions</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Book</th>
+                                    <th>Borrow Date</th>
+                                    <th>Due Date</th>
+                                    <th>Return Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="qr">
+                    <h2>Generate QR Code</h2>
+                    <div class="form-container">
+                        <div class="form-grid"><select id="qrUserType">
+                                <option value="student">Student</option>
+                                <option value="faculty">Faculty</option>
+                            </select><input type="text" id="qrUserId" placeholder="User ID"><input type="text"
+                                id="qrUserName" placeholder="User Name"></div><button onclick="generateQR()"
+                            class="btn-primary">Generate QR Code</button>
+                    </div>
+                    <div id="qrResult" style="display:none;text-align:center;margin-top:2rem">
+                        <div id="qrCodeContainer"></div><button onclick="downloadQR()" class="btn-primary"
+                            style="margin-top:1rem">Download QR</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RT Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .portal-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .portal-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .portal-card.student i {
+            color: #3b82f6;
+        }
+
+        .portal-card.faculty i {
+            color: #10b981;
+        }
+
+        .portal-card.admin i {
+            color: #ef4444;
+        }
+
+        .portal-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portal-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .portal-btn {
+            background: #f3f4f6;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .student .portal-btn {
+            color: #3b82f6;
+        }
+
+        .faculty .portal-btn {
+            color: #10b981;
+        }
+
+        .admin .portal-btn {
+            color: #ef4444;
+        }
+
+        .portal-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .login-form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-form-container.active {
+            display: block;
+        }
+
+        .login-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .login-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .qr-btn {
+            background: #f3f4f6;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .qr-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .qr-scanner {
+            display: none;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .qr-scanner.active {
+            display: block;
+        }
+
+        #qrVideo {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portal-selector {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .demo-credentials {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fef3c7;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .demo-credentials p {
+            margin: 0.25rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- Portal Selection -->
+        <div id="portalSelector" class="portal-selector">
+            <div class="portal-card student" onclick="showLoginForm('student')">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Student Portal</h3>
+                <p>Access your library account, borrow books, and track reading</p>
+                <button class="portal-btn">Login as Student</button>
+            </div>
+            <div class="portal-card faculty" onclick="showLoginForm('faculty')">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Faculty Portal</h3>
+                <p>Extended borrowing, research resources, and more</p>
+                <button class="portal-btn">Login as Faculty</button>
+            </div>
+            <div class="portal-card admin" onclick="showLoginForm('admin')">
+                <i class="fas fa-user-cog"></i>
+                <h3>Admin Portal</h3>
+                <p>Manage books, users, and library operations</p>
+                <button class="portal-btn">Login as Admin</button>
+            </div>
+        </div>
+
+        <!-- Student Login Form -->
+        <div id="studentLogin" class="login-form-container">
+            <div class="login-header">
+                <button class="back-btn" onclick="showPortalSelector()"><i class="fas fa-arrow-left"></i></button>
+                <h2><i class="fas fa-user-graduate"></i> Student Login</h2>
+            </div>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label>Student ID</label>
+                    <input type="text" id="studentId" placeholder="Enter your Student ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="studentPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login to Student Portal</button>
+            </form>
+            <div class="qr-section">
+                <button class="qr-btn" onclick="showQRScanner('student')"><i class="fas fa-qrcode"></i> Scan QR
+                    Code</button>
+                <div id="studentQRScanner" class="qr-scanner">
+                    <video id="qrVideo" autoplay playsinline></video>
+                    <button class="qr-btn" style="margin-top: 10px;" onclick="stopQRScanner()">Cancel</button>
+                </div>
+            </div>
+            <div class="demo-credentials">
+                <p><strong>Demo Credentials:</strong></p>
+                <p>Student ID: S001 | Password: student123</p>
+                <p>Student ID: S002 | Password: student123</p>
+            </div>
+        </div>
+
+        <!-- Faculty Login Form -->
+        <div id="facultyLogin" class="login-form-container">
+            <div class="login-header">
+                <button class="back-btn" onclick="showPortalSelector()"><i class="fas fa-arrow-left"></i></button>
+                <h2><i class="fas fa-chalkboard-teacher"></i> Faculty Login</h2>
+            </div>
+            <form id="facultyForm">
+                <div class="form-group">
+                    <label>Faculty ID</label>
+                    <input type="text" id="facultyId" placeholder="Enter your Faculty ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="facultyPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login to Faculty Portal</button>
+            </form>
+            <div class="demo-credentials">
+                <p><strong>Demo Credentials:</strong></p>
+                <p>Faculty ID: F001 | Password: faculty123</p>
+            </div>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div id="adminLogin" class="login-form-container">
+            <div class="login-header">
+                <button class="back-btn" onclick="showPortalSelector()"><i class="fas fa-arrow-left"></i></button>
+                <h2><i class="fas fa-user-cog"></i> Admin Login</h2>
+            </div>
+            <form id="adminForm">
+                <div class="form-group">
+                    <label>Admin ID</label>
+                    <input type="text" id="adminId" placeholder="Enter Admin ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="login-btn">Login to Admin Portal</button>
+            </form>
+            <div class="demo-credentials">
+                <p><strong>Demo Credentials:</strong></p>
+                <p>Admin ID: admin | Password: admin123</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        let currentStream = null;
+
+        function showPortalSelector() {
+            document.querySelectorAll('.login-form-container').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById('portalSelector').style.display = 'grid';
+        }
+
+        function showLoginForm(role) {
+            document.getElementById('portalSelector').style.display = 'none';
+            document.querySelectorAll('.login-form-container').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(`${role}Login`).classList.add('active');
+            stopQRScanner();
+        }
+
+        // Student Login
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('studentPassword').value;
+
+            // Demo authentication
+            if ((studentId === 'S001' || studentId === 'S002') && password === 'student123') {
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: studentId,
+                    name: studentId === 'S001' ? 'John Doe' : 'Jane Smith',
+                    role: 'student',
+                    course: studentId === 'S001' ? 'Computer Science' : 'Information Technology',
+                    year: '3rd Year'
+                }));
+                window.location.href = 'student.html';
+            } else {
+                showToast('Invalid credentials. Use S001/student123 or S002/student123', 'error');
+            }
+        });
+
+        // Faculty Login
+        document.getElementById('facultyForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const facultyId = document.getElementById('facultyId').value;
+            const password = document.getElementById('facultyPassword').value;
+
+            if (facultyId === 'F001' && password === 'faculty123') {
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: facultyId,
+                    name: 'Dr. Robert Smith',
+                    role: 'faculty',
+                    department: 'Computer Science',
+                    position: 'Professor'
+                }));
+                window.location.href = 'faculty.html';
+            } else {
+                showToast('Invalid credentials. Use F001/faculty123', 'error');
+            }
+        });
+
+        // Admin Login
+        document.getElementById('adminForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const adminId = document.getElementById('adminId').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (adminId === 'admin' && password === 'admin123') {
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: adminId,
+                    name: 'Administrator',
+                    role: 'admin'
+                }));
+                window.location.href = 'admin.html';
+            } else {
+                showToast('Invalid credentials. Use admin/admin123', 'error');
+            }
+        });
+
+        // QR Scanner
+        async function showQRScanner(role) {
+            const scannerDiv = document.getElementById(`${role}QRScanner`);
+            if (scannerDiv) {
+                scannerDiv.classList.add('active');
+                await startQRScanner(role);
+            }
+        }
+
+        async function startQRScanner(role) {
+            try {
+                const video = document.getElementById('qrVideo');
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                currentStream = stream;
+                video.srcObject = stream;
+                video.play();
+
+                // Simplified QR scanning - in production use a proper QR library
+                setTimeout(() => {
+                    stopQRScanner();
+                    showToast('QR scanned! Login successful (Demo)', 'success');
+                    if (role === 'student') {
+                        window.location.href = 'student.html';
+                    } else if (role === 'faculty') {
+                        window.location.href = 'faculty.html';
+                    }
+                }, 3000);
+            } catch (err) {
+                showToast('Could not access camera', 'error');
+            }
+        }
+
+        function stopQRScanner() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
+            }
+            document.querySelectorAll('.qr-scanner').forEach(scanner => {
+                scanner.classList.remove('active');
+            });
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Add toast styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .toast {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                background: #333;
+                color: white;
+                border-radius: 8px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            }
+            .toast.success { background: #10b981; }
+            .toast.error { background: #ef4444; }
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Check for stored book/category selection
+        const selectedBookId = sessionStorage.getItem('selectedBookId');
+        const selectedCategory = sessionStorage.getItem('selectedCategory');
+        if (selectedBookId) {
+            sessionStorage.removeItem('selectedBookId');
+        }
+        if (selectedCategory) {
+            sessionStorage.removeItem('selectedCategory');
+        }
+    </script>
+</body>
+
+</html>

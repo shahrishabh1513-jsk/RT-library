@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - RT Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/student.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/image/RT_LOGO_1.png" alt="RT Library" class="logo-img">
+                    <h1><i class="fas fa-book-reader"></i> Student Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">John Doe</span>
+                        <span class="user-id" id="userId">S001</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <button class="nav-btn active" data-tab="dashboard">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="my-books">
+                    <i class="fas fa-book"></i> My Books
+                </button>
+                <button class="nav-btn" data-tab="available-books">
+                    <i class="fas fa-search"></i> Browse Books
+                </button>
+                <button class="nav-btn" data-tab="profile">
+                    <i class="fas fa-user"></i> My Profile
+                </button>
+                <button class="nav-btn" data-tab="history">
+                    <i class="fas fa-history"></i> History
+                </button>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="active">
+                    <h2><i class="fas fa-th-large"></i> Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="card stat-card">
+                            <i class="fas fa-book"></i>
+                            <h3>Currently Borrowed</h3>
+                            <div class="value" id="borrowedCount">0</div>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Overdue Books</h3>
+                            <div class="value" id="overdueCount">0</div>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-calendar-check"></i>
+                            <h3>Days Until Due</h3>
+                            <div class="value" id="dueDays">0</div>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Reading Points</h3>
+                            <div class="value" id="readingPoints">150</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2><i class="fas fa-fire"></i> Recommended for You</h2>
+                        <div class="books-grid" id="recommendedGrid"></div>
+                    </div>
+                </section>
+
+                <!-- My Books Section -->
+                <section id="my-books">
+                    <h2><i class="fas fa-book"></i> My Borrowed Books</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Borrowed Date</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="borrowedTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Available Books Section -->
+                <section id="available-books">
+                    <h2><i class="fas fa-search"></i> Browse Available Books</h2>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search by title, author, or ISBN...">
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="computer-science">Computer Science</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="literature">Literature</option>
+                            <option value="history">History</option>
+                            <option value="biology">Biology</option>
+                        </select>
+                        <button onclick="searchBooks()"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="books-grid" id="booksGrid"></div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile">
+                    <h2><i class="fas fa-user"></i> My Profile</h2>
+                    <div class="profile-card" id="profileCard"></div>
+                </section>
+
+                <!-- History Section -->
+                <section id="history">
+                    <h2><i class="fas fa-history"></i> Borrowing History</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Borrowed Date</th>
+                                    <th>Returned Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-book"></i> Book Details</h3>
+            <div id="modalContent"></div>
+            <div class="modal-actions"><button id="modalBorrowBtn" class="btn-borrow">Borrow Book</button><button
+                    id="modalCloseBtn" class="btn-close">Close</button></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/student.js"></script>
+</body>
+
+</html>

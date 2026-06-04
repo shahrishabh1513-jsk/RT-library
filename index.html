@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT Library - Your Digital Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/image/RT_LOGO_1.png" alt="RT Library Logo" class="logo-img">
+                <h1>RT Library</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#books" class="nav-link">Books</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="window.location.href='login.html'">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn-menu" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#books">Books</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button onclick="window.location.href='login.html'">Login</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to <span class="highlight">RT Library</span></h1>
+                <p>Discover a world of knowledge with over 10,000+ books, journals, and digital resources. Your gateway
+                    to unlimited learning.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='login.html'">
+                        <i class="fas fa-graduation-cap"></i> Get Started
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('books')">
+                        <i class="fas fa-book"></i> Explore Books
+                    </button>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <i class="fas fa-book"></i>
+                    <h3>10,000+</h3>
+                    <p>Books Available</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>5,000+</h3>
+                    <p>Active Readers</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>24/7</h3>
+                    <p>Digital Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose <span>RT Library</span>?</h2>
+                <p>Experience the best digital library platform with modern features</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Smart Search</h3>
+                    <p>Find any book instantly with our advanced search engine</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Ready</h3>
+                    <p>Access library anywhere, anytime on any device</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <h3>Real-time Updates</h3>
+                    <p>Get notifications for due dates and new arrivals</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Reading Analytics</h3>
+                    <p>Track your reading progress and set goals</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI Recommendations</h3>
+                    <p>Discover your next favorite book with AI</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data is protected with enterprise security</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section id="books" class="featured-books">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured <span>Books</span></h2>
+                <p>Explore our most popular and recommended books</p>
+            </div>
+            <div class="books-grid" id="featuredBooksGrid">
+                <!-- Books will be loaded here by JavaScript -->
+            </div>
+            <div class="view-all">
+                <button class="btn-view" onclick="window.location.href='login.html'">
+                    View All Books <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse by <span>Category</span></h2>
+                <p>Find books in your favorite genre</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-category="computer-science">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Computer Science</h3>
+                    <p>120+ books</p>
+                </div>
+                <div class="category-card" data-category="mathematics">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Mathematics</h3>
+                    <p>85+ books</p>
+                </div>
+                <div class="category-card" data-category="physics">
+                    <i class="fas fa-atom"></i>
+                    <h3>Physics</h3>
+                    <p>70+ books</p>
+                </div>
+                <div class="category-card" data-category="literature">
+                    <i class="fas fa-feather-alt"></i>
+                    <h3>Literature</h3>
+                    <p>95+ books</p>
+                </div>
+                <div class="category-card" data-category="history">
+                    <i class="fas fa-landmark"></i>
+                    <h3>History</h3>
+                    <p>60+ books</p>
+                </div>
+                <div class="category-card" data-category="biology">
+                    <i class="fas fa-dna"></i>
+                    <h3>Biology</h3>
+                    <p>55+ books</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About <span>RT Library</span></h2>
+                    <p>RT Library is a modern digital library platform designed to provide seamless access to a vast
+                        collection of books, journals, and educational resources. Our mission is to make learning
+                        accessible to everyone, anytime, anywhere.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <h3>10,000+</h3>
+                            <p>Books</p>
+                        </div>
+                        <div class="about-stat">
+                            <h3>500+</h3>
+                            <p>Authors</p>
+                        </div>
+                        <div class="about-stat">
+                            <h3>50+</h3>
+                            <p>Categories</p>
+                        </div>
+                        <div class="about-stat">
+                            <h3>5,000+</h3>
+                            <p>Students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in <span>Touch</span></h2>
+                <p>Have questions? We're here to help</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <input type="text" placeholder="Subject">
+                        <textarea rows="5" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Address</h3>
+                        <p>GETCO, NH 8, near Biltech,<br>Dhamdod, Kosamba, Gujarat 394125</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone</h3>
+                        <p>+91 95120 35619</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>ppsulibrary@ppsu.ac.in</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/image/RT_LOGO_2.png" alt="RT Library Logo">
+                    <h3>RT Library</h3>
+                    <p>Your gateway to unlimited knowledge</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RT Library. All rights reserved. | RT1504 | Design & Developed with <i
+                        class="fas fa-heart"></i> by Rishabh Shah</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
