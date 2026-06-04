@@ -1,0 +1,22 @@
+library-website/
+├── index.html
+├── login.html
+├── admin.html
+├── faculty.html
+├── student.html
+├── css/
+│   ├── style.css
+│   ├── admin.css
+│   ├── faculty.css
+│   └── student.css
+├── js/
+│   ├── main.js
+│   ├── admin.js
+│   ├── faculty.js
+│   ├── student.js
+│   └── data.js
+├── assets/
+│   └── image/
+│       ├── RT_LOGO_1.png
+│       └── RT_LOGO_2.png
+└── README.md
