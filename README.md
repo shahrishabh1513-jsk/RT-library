@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/RT_LOGO_PLACEHOLDER" width="180" alt="RT Library Logo"/>
+  <img width="677" height="369" alt="RT_LOGO" src="https://github.com/user-attachments/assets/1de71f31-8797-4bab-9a97-ac3a65e34e48" />
 </p>
 
 <h1 align="center">📚 RT Library Management System</h1>
