@@ -74,34 +74,18 @@ const booksData = [
     { id: 60, title: "Your Inner Fish", author: "Neil Shubin", isbn: "9780307277459", category: "biology", copies: 3, available: 3, description: "Journey into the 3.5-billion-year history of the human body." }
 ];
 
-// Categories
-const categories = [
-    { id: "computer-science", name: "Computer Science", icon: "fa-laptop-code", count: 10 },
-    { id: "mathematics", name: "Mathematics", icon: "fa-calculator", count: 10 },
-    { id: "physics", name: "Physics", icon: "fa-atom", count: 10 },
-    { id: "literature", name: "Literature", icon: "fa-feather-alt", count: 10 },
-    { id: "history", name: "History", icon: "fa-landmark", count: 10 },
-    { id: "biology", name: "Biology", icon: "fa-dna", count: 10 }
-];
-
-// User Data
-let currentUser = null;
-let isLoggedIn = false;
-
-// Transaction History
-let transactions = [];
-
-// Function to get books by category
-function getBooksByCategory(category) {
-    return booksData.filter(book => book.category === category);
-}
-
-// Function to get featured books (first 6)
 function getFeaturedBooks() {
     return booksData.slice(0, 6);
 }
 
-// Function to search books
+function getBookById(id) {
+    return booksData.find(book => book.id === id);
+}
+
+function getBooksByCategory(category) {
+    return booksData.filter(book => book.category === category);
+}
+
 function searchBooks(query) {
     const searchTerm = query.toLowerCase();
     return booksData.filter(book =>
@@ -109,62 +93,4 @@ function searchBooks(query) {
         book.author.toLowerCase().includes(searchTerm) ||
         book.isbn.includes(searchTerm)
     );
-}
-
-// Function to get book by ID
-function getBookById(id) {
-    return booksData.find(book => book.id === id);
-}
-
-// Function to check if book is available
-function isBookAvailable(bookId) {
-    const book = getBookById(bookId);
-    return book && book.available > 0;
-}
-
-// Function to borrow a book
-function borrowBook(userId, bookId) {
-    const book = getBookById(bookId);
-    if (!book || book.available <= 0) {
-        return { success: false, message: "Book not available" };
-    }
-
-    book.available--;
-
-    const transaction = {
-        id: transactions.length + 1,
-        userId: userId,
-        bookId: bookId,
-        bookTitle: book.title,
-        borrowDate: new Date().toISOString(),
-        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-        status: "active"
-    };
-
-    transactions.unshift(transaction);
-
-    return { success: true, message: "Book borrowed successfully", transaction };
-}
-
-// Function to return a book
-function returnBook(transactionId) {
-    const transaction = transactions.find(t => t.id === transactionId);
-    if (!transaction || transaction.status !== "active") {
-        return { success: false, message: "Invalid transaction" };
-    }
-
-    const book = getBookById(transaction.bookId);
-    if (book) {
-        book.available++;
-    }
-
-    transaction.status = "returned";
-    transaction.returnDate = new Date().toISOString();
-
-    return { success: true, message: "Book returned successfully" };
-}
-
-// Export for use in other files (for browser)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { booksData, categories, getBooksByCategory, getFeaturedBooks, searchBooks, getBookById, isBookAvailable, borrowBook, returnBook };
 }
