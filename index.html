@@ -4,24 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RT Library - Your Digital Learning Hub</title>
+    <title>RT Library | Where Knowledge Meets Innovation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!-- Page Transition Overlay -->
+    <div class="page-transition">
+        <div class="transition-loader">
+            <div class="book-loader">
+                <div class="book-page"></div>
+                <div class="book-page"></div>
+                <div class="book-page"></div>
+            </div>
+            <p>Loading Experience...</p>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="assets/image/RT_LOGO_1.png" alt="RT Library Logo" class="logo-img">
-                <h1>RT Library</h1>
+                <div class="logo-icon">
+                    <i class="fas fa-book-open"></i>
+                    <div class="logo-glow"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-rt">RT</span>
+                    <span class="logo-library">Library</span>
+                </div>
             </div>
             <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
+                <a href="#home" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#books" class="nav-link">Books</a>
                 <a href="#about" class="nav-link">About</a>
@@ -29,7 +47,7 @@
             </div>
             <div class="nav-buttons">
                 <button class="btn-login" onclick="window.location.href='login.html'">
-                    <i class="fas fa-sign-in-alt"></i> Login
+                    <i class="fas fa-sign-in-alt"></i> <span>Login</span>
                 </button>
                 <button class="btn-menu" id="menuToggle">
                     <i class="fas fa-bars"></i>
@@ -40,48 +58,84 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#books">Books</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <button onclick="window.location.href='login.html'">Login</button>
+        <div class="mobile-menu-inner">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#books">Books</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <button onclick="window.location.href='login.html'">Login</button>
+        </div>
     </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
+        <!-- Animated Background -->
+        <div class="hero-bg-animation">
+            <div class="floating-books">
+                <div class="floating-book book1"><i class="fas fa-book"></i></div>
+                <div class="floating-book book2"><i class="fas fa-book-open"></i></div>
+                <div class="floating-book book3"><i class="fas fa-journal-whills"></i></div>
+                <div class="floating-book book4"><i class="fas fa-scroll"></i></div>
+                <div class="floating-book book5"><i class="fas fa-graduation-cap"></i></div>
+                <div class="floating-book book6"><i class="fas fa-feather-alt"></i></div>
+            </div>
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+
         <div class="hero-content">
-            <div class="hero-text">
-                <h1>Welcome to <span class="highlight">RT Library</span></h1>
-                <p>Discover a world of knowledge with over 10,000+ books, journals, and digital resources. Your gateway
-                    to unlimited learning.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" onclick="window.location.href='login.html'">
-                        <i class="fas fa-graduation-cap"></i> Get Started
-                    </button>
-                    <button class="btn-secondary" onclick="scrollToSection('books')">
-                        <i class="fas fa-book"></i> Explore Books
-                    </button>
-                </div>
+            <div class="hero-badge">
+                <span class="badge-pulse"></span>
+                <span>✨ Welcome to the Future of Reading ✨</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Discover, Learn,</span>
+                <span class="title-line highlight">Grow with</span>
+                <span class="title-gradient">RT Library</span>
+            </h1>
+            <p class="hero-description">Your gateway to unlimited knowledge. Access thousands of books, journals, and
+                resources anytime, anywhere.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="window.location.href='login.html'">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Get Started</span>
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('books')">
+                    <i class="fas fa-book"></i>
+                    <span>Explore Books</span>
+                </button>
             </div>
             <div class="hero-stats">
-                <div class="stat-card">
-                    <i class="fas fa-book"></i>
-                    <h3>10,000+</h3>
-                    <p>Books Available</p>
+                <div class="stat-item" data-count="10000">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Books Available</div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3>5,000+</h3>
-                    <p>Active Readers</p>
+                <div class="stat-item" data-count="5000">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Active Readers</div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>24/7</h3>
-                    <p>Digital Access</p>
+                <div class="stat-item" data-count="247">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Digital Access</div>
                 </div>
             </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse-wheel"></div>
+            <div class="scroll-text">Scroll Down</div>
         </div>
     </section>
 
@@ -89,39 +143,58 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose <span>RT Library</span>?</h2>
-                <p>Experience the best digital library platform with modern features</p>
+                <div class="section-badge">Why Choose Us</div>
+                <h2>Amazing <span class="gradient-text">Features</span></h2>
+                <p>Experience the best digital library platform with innovative features</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    </div>
                     <h3>Smart Search</h3>
-                    <p>Find any book instantly with our advanced search engine</p>
+                    <p>Find any book instantly with AI-powered search engine</p>
+                    <div class="feature-hover"></div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    </div>
                     <h3>Mobile Ready</h3>
                     <p>Access library anywhere, anytime on any device</p>
+                    <div class="feature-hover"></div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    </div>
                     <h3>Real-time Updates</h3>
                     <p>Get notifications for due dates and new arrivals</p>
+                    <div class="feature-hover"></div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    </div>
                     <h3>Reading Analytics</h3>
                     <p>Track your reading progress and set goals</p>
+                    <div class="feature-hover"></div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    </div>
                     <h3>AI Recommendations</h3>
                     <p>Discover your next favorite book with AI</p>
+                    <div class="feature-hover"></div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    </div>
                     <h3>Secure & Private</h3>
                     <p>Your data is protected with enterprise security</p>
+                    <div class="feature-hover"></div>
                 </div>
             </div>
         </div>
@@ -131,15 +204,15 @@
     <section id="books" class="featured-books">
         <div class="container">
             <div class="section-header">
-                <h2>Featured <span>Books</span></h2>
+                <div class="section-badge">Our Collection</div>
+                <h2>Featured <span class="gradient-text">Books</span></h2>
                 <p>Explore our most popular and recommended books</p>
             </div>
-            <div class="books-grid" id="featuredBooksGrid">
-                <!-- Books will be loaded here by JavaScript -->
-            </div>
+            <div class="books-grid" id="featuredBooksGrid"></div>
             <div class="view-all">
                 <button class="btn-view" onclick="window.location.href='login.html'">
-                    View All Books <i class="fas fa-arrow-right"></i>
+                    <span>View All Books</span>
+                    <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
@@ -149,39 +222,46 @@
     <section class="categories">
         <div class="container">
             <div class="section-header">
-                <h2>Browse by <span>Category</span></h2>
+                <div class="section-badge">Browse By</div>
+                <h2>Book <span class="gradient-text">Categories</span></h2>
                 <p>Find books in your favorite genre</p>
             </div>
             <div class="categories-grid">
                 <div class="category-card" data-category="computer-science">
-                    <i class="fas fa-laptop-code"></i>
+                    <div class="category-icon"><i class="fas fa-laptop-code"></i></div>
                     <h3>Computer Science</h3>
                     <p>120+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
                 <div class="category-card" data-category="mathematics">
-                    <i class="fas fa-calculator"></i>
+                    <div class="category-icon"><i class="fas fa-calculator"></i></div>
                     <h3>Mathematics</h3>
                     <p>85+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
                 <div class="category-card" data-category="physics">
-                    <i class="fas fa-atom"></i>
+                    <div class="category-icon"><i class="fas fa-atom"></i></div>
                     <h3>Physics</h3>
                     <p>70+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
                 <div class="category-card" data-category="literature">
-                    <i class="fas fa-feather-alt"></i>
+                    <div class="category-icon"><i class="fas fa-feather-alt"></i></div>
                     <h3>Literature</h3>
                     <p>95+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
                 <div class="category-card" data-category="history">
-                    <i class="fas fa-landmark"></i>
+                    <div class="category-icon"><i class="fas fa-landmark"></i></div>
                     <h3>History</h3>
                     <p>60+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
                 <div class="category-card" data-category="biology">
-                    <i class="fas fa-dna"></i>
+                    <div class="category-icon"><i class="fas fa-dna"></i></div>
                     <h3>Biology</h3>
                     <p>55+ books</p>
+                    <div class="category-overlay"></div>
                 </div>
             </div>
         </div>
@@ -192,31 +272,45 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>About <span>RT Library</span></h2>
+                    <div class="section-badge">About Us</div>
+                    <h2>Welcome to <span class="gradient-text">RT Library</span></h2>
                     <p>RT Library is a modern digital library platform designed to provide seamless access to a vast
                         collection of books, journals, and educational resources. Our mission is to make learning
                         accessible to everyone, anytime, anywhere.</p>
                     <div class="about-stats">
                         <div class="about-stat">
-                            <h3>10,000+</h3>
+                            <div class="stat-number">10K+</div>
                             <p>Books</p>
                         </div>
                         <div class="about-stat">
-                            <h3>500+</h3>
+                            <div class="stat-number">500+</div>
                             <p>Authors</p>
                         </div>
                         <div class="about-stat">
-                            <h3>50+</h3>
+                            <div class="stat-number">50+</div>
                             <p>Categories</p>
                         </div>
                         <div class="about-stat">
-                            <h3>5,000+</h3>
+                            <div class="stat-number">5K+</div>
                             <p>Students</p>
                         </div>
                     </div>
+                    <div class="about-buttons">
+                        <button class="btn-primary" onclick="window.location.href='login.html'">
+                            <i class="fas fa-user-plus"></i> Join Now
+                        </button>
+                        <button class="btn-secondary" onclick="scrollToSection('contact')">
+                            <i class="fas fa-envelope"></i> Contact Us
+                        </button>
+                    </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
+                <div class="about-visual">
+                    <div class="about-card">
+                        <div class="about-card-icon"><i class="fas fa-quote-right"></i></div>
+                        <p>"The only thing that you absolutely have to know is the location of the library."</p>
+                        <h4>- Albert Einstein</h4>
+                    </div>
+                    <div class="floating-ornament">
                         <i class="fas fa-book-open"></i>
                     </div>
                 </div>
@@ -228,35 +322,51 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
-                <h2>Get in <span>Touch</span></h2>
+                <div class="section-badge">Get In Touch</div>
+                <h2>Contact <span class="gradient-text">Us</span></h2>
                 <p>Have questions? We're here to help</p>
             </div>
             <div class="contact-content">
-                <div class="contact-form">
-                    <form id="contactForm">
+                <div class="contact-form-wrapper">
+                    <form id="contactForm" class="contact-form">
                         <div class="form-row">
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
                         </div>
-                        <input type="text" placeholder="Subject">
-                        <textarea rows="5" placeholder="Your Message"></textarea>
-                        <button type="submit" class="btn-primary">Send Message</button>
+                        <div class="input-group">
+                            <i class="fas fa-tag"></i>
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-comment"></i>
+                            <textarea rows="5" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </form>
                 </div>
-                <div class="contact-info">
+                <div class="contact-info-wrapper">
                     <div class="info-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Address</h3>
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Visit Us</h3>
                         <p>GETCO, NH 8, near Biltech,<br>Dhamdod, Kosamba, Gujarat 394125</p>
                     </div>
                     <div class="info-card">
-                        <i class="fas fa-phone"></i>
-                        <h3>Phone</h3>
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <h3>Call Us</h3>
                         <p>+91 95120 35619</p>
                     </div>
                     <div class="info-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Email Us</h3>
                         <p>ppsulibrary@ppsu.ac.in</p>
                     </div>
                 </div>
@@ -268,10 +378,19 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="assets/image/RT_LOGO_2.png" alt="RT Library Logo">
-                    <h3>RT Library</h3>
-                    <p>Your gateway to unlimited knowledge</p>
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/image/RT_LOGO_2.png" alt="RT Library Logo">
+                        <h3>RT Library</h3>
+                    </div>
+                    <p>Your gateway to unlimited knowledge. Empowering learners worldwide with instant access to
+                        resources.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
@@ -292,13 +411,12 @@
                         <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
-                <div class="footer-social">
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates and new arrivals</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
