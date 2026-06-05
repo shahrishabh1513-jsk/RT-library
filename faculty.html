@@ -4,63 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Dashboard - RT Library</title>
+    <title>Faculty Portal - RT Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/faculty.css">
 </head>
 
 <body>
+    <!-- Page Transition -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader">
+            <div class="book-page-load"></div>
+            <div class="book-page-load"></div>
+            <div class="book-page-load"></div>
+        </div>
+    </div>
+
     <div class="app-container">
+        <!-- Header -->
         <header>
             <div class="header-content">
-                <div class="logo"><img src="assets/image/RT_LOGO_1.png" alt="RT Library">
-                    <h1><i class="fas fa-chalkboard-teacher"></i> Faculty Dashboard</h1>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-rt">RT</span>
+                        <span class="logo-library">Library</span>
+                    </div>
                 </div>
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">DR</div>
-                    <div class="user-details"><span class="user-name" id="userName">Dr. Robert Smith</span><span
-                            class="user-id" id="userId">F001</span></div><button class="logout-btn"
-                        onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Dr. Robert Smith</span>
+                        <span class="user-id" id="userId">F001</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
         </header>
+
         <div class="main-content">
+            <!-- Sidebar -->
             <aside class="sidebar">
-                <button class="nav-btn active" data-tab="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
-                <button class="nav-btn" data-tab="my-books"><i class="fas fa-book"></i> My Books</button>
-                <button class="nav-btn" data-tab="available-books"><i class="fas fa-search"></i> Browse Books</button>
-                <button class="nav-btn" data-tab="research"><i class="fas fa-flask"></i> Research</button>
-                <button class="nav-btn" data-tab="profile"><i class="fas fa-user"></i> Profile</button>
+                <button class="nav-btn active" data-tab="dashboard">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="my-books">
+                    <i class="fas fa-book"></i> My Books
+                </button>
+                <button class="nav-btn" data-tab="available-books">
+                    <i class="fas fa-search"></i> Browse Books
+                </button>
+                <button class="nav-btn" data-tab="research">
+                    <i class="fas fa-flask"></i> Research
+                </button>
+                <button class="nav-btn" data-tab="profile">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button class="nav-btn" data-tab="history">
+                    <i class="fas fa-history"></i> History
+                </button>
             </aside>
+
+            <!-- Content Area -->
             <main class="content-area">
+                <!-- Dashboard Section -->
                 <section id="dashboard" class="active">
-                    <h2>Dashboard Overview</h2>
+                    <div class="welcome-banner">
+                        <div class="welcome-text">
+                            <h2>Welcome back, <span id="welcomeName">Dr. Smith</span>!</h2>
+                            <p>Your faculty dashboard is ready. 90-day borrowing period available.</p>
+                        </div>
+                        <div class="welcome-icon">
+                            <i class="fas fa-chalkboard"></i>
+                        </div>
+                    </div>
+
                     <div class="dashboard-cards">
-                        <div class="card"><i class="fas fa-book"></i>
+                        <div class="card stat-card">
+                            <i class="fas fa-book"></i>
                             <h3>Currently Borrowed</h3>
                             <div class="value" id="borrowedCount">0</div>
                         </div>
-                        <div class="card"><i class="fas fa-clock"></i>
+                        <div class="card stat-card">
+                            <i class="fas fa-clock"></i>
                             <h3>Overdue Books</h3>
                             <div class="value" id="overdueCount">0</div>
                         </div>
-                        <div class="card"><i class="fas fa-calendar-check"></i>
+                        <div class="card stat-card">
+                            <i class="fas fa-flask"></i>
                             <h3>Research Credits</h3>
-                            <div class="value">150</div>
+                            <div class="value" id="researchCredits">150</div>
                         </div>
-                        <div class="card"><i class="fas fa-graduation-cap"></i>
+                        <div class="card stat-card">
+                            <i class="fas fa-graduation-cap"></i>
                             <h3>Faculty Status</h3>
                             <div class="value">Active</div>
                         </div>
                     </div>
+
                     <div class="card">
-                        <h2><i class="fas fa-fire"></i> Recommended Research Materials</h2>
+                        <div class="card-header">
+                            <h2><i class="fas fa-fire"></i> Recommended Research Materials</h2>
+                            <span class="live-indicator"><span class="live-dot"></span> Faculty Access</span>
+                        </div>
                         <div class="books-grid" id="recommendedGrid"></div>
                     </div>
+
+                    <div class="faculty-features">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <h3>90-Day Borrowing</h3>
+                            <p>Extended borrowing period for faculty members</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                            <h3>Research Priority</h3>
+                            <p>Priority access to research materials</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-tools"></i></div>
+                            <h3>Citation Tools</h3>
+                            <p>Access to premium citation management</p>
+                        </div>
+                    </div>
                 </section>
+
+                <!-- My Books Section -->
                 <section id="my-books">
-                    <h2>My Borrowed Books</h2>
+                    <h2><i class="fas fa-book"></i> My Borrowed Books</h2>
                     <div class="table-container">
                         <table>
                             <thead>
@@ -77,10 +152,16 @@
                         </table>
                     </div>
                 </section>
+
+                <!-- Available Books Section -->
                 <section id="available-books">
-                    <h2>Browse Available Books</h2>
-                    <div class="search-container"><input type="text" id="searchInput" placeholder="Search..."><select
-                            id="categoryFilter">
+                    <h2><i class="fas fa-search"></i> Browse Available Books</h2>
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search by title, author, or ISBN...">
+                        </div>
+                        <select id="categoryFilter">
                             <option value="">All Categories</option>
                             <option value="computer-science">Computer Science</option>
                             <option value="mathematics">Mathematics</option>
@@ -88,33 +169,105 @@
                             <option value="literature">Literature</option>
                             <option value="history">History</option>
                             <option value="biology">Biology</option>
-                        </select><button onclick="searchBooks()"><i class="fas fa-search"></i> Search</button></div>
+                        </select>
+                        <button onclick="searchBooks()"><i class="fas fa-search"></i> Search</button>
+                    </div>
                     <div class="books-grid" id="booksGrid"></div>
                 </section>
+
+                <!-- Research Section -->
                 <section id="research">
                     <h2><i class="fas fa-flask"></i> Research Resources</h2>
                     <div class="research-grid">
-                        <div class="research-card"><i class="fas fa-file-alt"></i>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-file-alt"></i></div>
                             <h3>Academic Journals</h3>
                             <p>Access to 500+ peer-reviewed journals</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to journals...', 'info')">Access →</button>
                         </div>
-                        <div class="research-card"><i class="fas fa-database"></i>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-database"></i></div>
                             <h3>Research Databases</h3>
                             <p>IEEE, Springer, ScienceDirect access</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to databases...', 'info')">Access →</button>
                         </div>
-                        <div class="research-card"><i class="fas fa-tools"></i>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-tools"></i></div>
                             <h3>Citation Tools</h3>
                             <p>BibTeX, EndNote, Mendeley support</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to citation tools...', 'info')">Access →</button>
+                        </div>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Research Analytics</h3>
+                            <p>Track your research impact</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to analytics...', 'info')">Access →</button>
+                        </div>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-users"></i></div>
+                            <h3>Collaboration Tools</h3>
+                            <p>Connect with fellow researchers</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to collaboration...', 'info')">Access →</button>
+                        </div>
+                        <div class="research-card">
+                            <div class="research-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <h3>Thesis Support</h3>
+                            <p>Resources for thesis writing</p>
+                            <button class="research-btn"
+                                onclick="showToast('Redirecting to thesis support...', 'info')">Access →</button>
                         </div>
                     </div>
                 </section>
+
+                <!-- Profile Section -->
                 <section id="profile">
-                    <h2>My Profile</h2>
+                    <h2><i class="fas fa-user"></i> My Profile</h2>
                     <div class="profile-card" id="profileCard"></div>
+                </section>
+
+                <!-- History Section -->
+                <section id="history">
+                    <h2><i class="fas fa-history"></i> Borrowing History</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Borrowed Date</th>
+                                    <th>Returned Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTable"></tbody>
+                        </table>
+                    </div>
                 </section>
             </main>
         </div>
     </div>
+
+    <!-- Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-book"></i> Book Details</h3>
+                <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="modalContent"></div>
+            <div class="modal-actions">
+                <button id="modalBorrowBtn" class="btn-borrow"><i class="fas fa-hand-holding"></i> Borrow (90
+                    days)</button>
+                <button id="modalCloseBtn" class="btn-close" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/data.js"></script>
     <script src="js/faculty.js"></script>
 </body>

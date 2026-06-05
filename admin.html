@@ -4,183 +4,577 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - RT Library</title>
+    <title>Admin Portal - RT Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 
 <body>
+    <!-- Page Transition -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader">
+            <div class="book-page-load"></div>
+            <div class="book-page-load"></div>
+            <div class="book-page-load"></div>
+        </div>
+    </div>
+
     <div class="app-container">
+        <!-- Header -->
         <header>
             <div class="header-content">
-                <div class="logo"><img src="assets/image/RT_LOGO_1.png" alt="RT Library">
-                    <h1><i class="fas fa-user-cog"></i> Admin Dashboard</h1>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-rt">RT</span>
+                        <span class="logo-library">Library</span>
+                    </div>
                 </div>
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">AD</div>
-                    <div><span class="user-name" id="userName">Administrator</span><span class="user-id"
-                            id="userId">admin</span></div><button class="logout-btn" onclick="logout()"><i
-                            class="fas fa-sign-out-alt"></i></button>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Administrator</span>
+                        <span class="user-id" id="userId">admin</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
         </header>
+
         <div class="main-content">
+            <!-- Sidebar -->
             <aside class="sidebar">
-                <button class="nav-btn active" data-tab="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
-                <button class="nav-btn" data-tab="books"><i class="fas fa-book"></i> Manage Books</button>
-                <button class="nav-btn" data-tab="users"><i class="fas fa-users"></i> Manage Users</button>
-                <button class="nav-btn" data-tab="transactions"><i class="fas fa-exchange-alt"></i>
-                    Transactions</button>
-                <button class="nav-btn" data-tab="qr"><i class="fas fa-qrcode"></i> Generate QR</button>
+                <button class="nav-btn active" data-tab="dashboard">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="books">
+                    <i class="fas fa-book"></i> Manage Books
+                </button>
+                <button class="nav-btn" data-tab="students">
+                    <i class="fas fa-user-graduate"></i> Manage Students
+                </button>
+                <button class="nav-btn" data-tab="faculty">
+                    <i class="fas fa-chalkboard-teacher"></i> Manage Faculty
+                </button>
+                <button class="nav-btn" data-tab="transactions">
+                    <i class="fas fa-exchange-alt"></i> Transactions
+                </button>
+                <button class="nav-btn" data-tab="qr">
+                    <i class="fas fa-qrcode"></i> Generate QR
+                </button>
+                <button class="nav-btn" data-tab="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
             </aside>
+
+            <!-- Content Area -->
             <main class="content-area">
+                <!-- Dashboard Section -->
                 <section id="dashboard" class="active">
-                    <h2>Dashboard Overview</h2>
-                    <div class="dashboard-cards">
-                        <div class="card"><i class="fas fa-book"></i>
-                            <h3>Total Books</h3>
-                            <div class="value" id="totalBooks">60</div>
+                    <div class="welcome-banner">
+                        <div class="welcome-text">
+                            <h2>Welcome, <span id="welcomeName">Administrator</span>!</h2>
+                            <p>Library Management System Overview</p>
                         </div>
-                        <div class="card"><i class="fas fa-users"></i>
-                            <h3>Total Students</h3>
-                            <div class="value" id="totalStudents">2</div>
-                        </div>
-                        <div class="card"><i class="fas fa-chalkboard-teacher"></i>
-                            <h3>Total Faculty</h3>
-                            <div class="value" id="totalFaculty">1</div>
-                        </div>
-                        <div class="card"><i class="fas fa-exchange-alt"></i>
-                            <h3>Active Borrowings</h3>
-                            <div class="value" id="activeBorrowings">0</div>
+                        <div class="welcome-icon">
+                            <i class="fas fa-chart-line"></i>
                         </div>
                     </div>
-                    <div class="card">
-                        <h2>Recent Transactions</h2>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>User</th>
-                                        <th>Book</th>
-                                        <th>Type</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="recentTransactions"></tbody>
-                            </table>
+
+                    <div class="dashboard-cards">
+                        <div class="card stat-card">
+                            <i class="fas fa-book"></i>
+                            <h3>Total Books</h3>
+                            <div class="value" id="totalBooks">60</div>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +12 this month</span>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-user-graduate"></i>
+                            <h3>Total Students</h3>
+                            <div class="value" id="totalStudents">2</div>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +2 this month</span>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Total Faculty</h3>
+                            <div class="value" id="totalFaculty">1</div>
+                            <span class="trend"><i class="fas fa-minus"></i> No change</span>
+                        </div>
+                        <div class="card stat-card">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h3>Active Borrowings</h3>
+                            <div class="value" id="activeBorrowings">0</div>
+                            <span class="trend down"><i class="fas fa-arrow-down"></i> -5 from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="card half">
+                            <div class="card-header">
+                                <h2><i class="fas fa-chart-pie"></i> Library Overview</h2>
+                                <span class="live-indicator"><span class="live-dot"></span> Live Stats</span>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-circle" data-percent="85">
+                                        <svg viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e9ecef"
+                                                stroke-width="8" />
+                                            <circle class="progress-ring" cx="50" cy="50" r="45" fill="none"
+                                                stroke="var(--primary)" stroke-width="8" stroke-dasharray="283"
+                                                stroke-dashoffset="42" />
+                                        </svg>
+                                        <span class="stat-percent">85%</span>
+                                    </div>
+                                    <p>Collection Utilization</p>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-circle" data-percent="72">
+                                        <svg viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e9ecef"
+                                                stroke-width="8" />
+                                            <circle class="progress-ring" cx="50" cy="50" r="45" fill="none"
+                                                stroke="var(--success)" stroke-width="8" stroke-dasharray="283"
+                                                stroke-dashoffset="79" />
+                                        </svg>
+                                        <span class="stat-percent">72%</span>
+                                    </div>
+                                    <p>Active Users</p>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-circle" data-percent="94">
+                                        <svg viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e9ecef"
+                                                stroke-width="8" />
+                                            <circle class="progress-ring" cx="50" cy="50" r="45" fill="none"
+                                                stroke="var(--secondary-dark)" stroke-width="8" stroke-dasharray="283"
+                                                stroke-dashoffset="17" />
+                                        </svg>
+                                        <span class="stat-percent">94%</span>
+                                    </div>
+                                    <p>Satisfaction Rate</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card half">
+                            <div class="card-header">
+                                <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                                <button class="refresh-btn" onclick="loadRecentTransactions()"><i
+                                        class="fas fa-sync-alt"></i></button>
+                            </div>
+                            <div class="activity-list" id="recentActivity">
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fas fa-spinner fa-spin"></i></div>
+                                    <div class="activity-details">
+                                        <p>Loading recent activity...</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
+
+                <!-- Manage Books Section -->
                 <section id="books">
-                    <h2>Manage Books</h2>
+                    <h2><i class="fas fa-book"></i> Manage Books</h2>
+
+                    <!-- Add Book Form -->
                     <div class="form-container">
-                        <h3>Add New Book</h3>
+                        <div class="form-header">
+                            <h3><i class="fas fa-plus-circle"></i> Add New Book</h3>
+                            <p>Add books to the library collection</p>
+                        </div>
                         <form id="addBookForm">
-                            <div class="form-grid"><input type="text" id="bookTitle" placeholder="Book Title"
-                                    required><input type="text" id="bookAuthor" placeholder="Author" required><input
-                                    type="text" id="bookISBN" placeholder="ISBN" required><input type="number"
-                                    id="bookCopies" placeholder="Number of Copies" value="1" min="1"><select
-                                    id="bookCategory">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <i class="fas fa-heading"></i>
+                                    <input type="text" id="bookTitle" placeholder="Book Title" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="bookAuthor" placeholder="Author" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-barcode"></i>
+                                    <input type="text" id="bookISBN" placeholder="ISBN" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-copy"></i>
+                                    <input type="number" id="bookCopies" placeholder="Number of Copies" value="1"
+                                        min="1">
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-tag"></i>
+                                    <select id="bookCategory">
+                                        <option value="computer-science">Computer Science</option>
+                                        <option value="mathematics">Mathematics</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="literature">Literature</option>
+                                        <option value="history">History</option>
+                                        <option value="biology">Biology</option>
+                                    </select>
+                                </div>
+                                <div class="input-group full-width">
+                                    <i class="fas fa-align-left"></i>
+                                    <textarea id="bookDescription" placeholder="Book Description (optional)"
+                                        rows="3"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-plus"></i> Add Book
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Books Table -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3><i class="fas fa-list"></i> All Books</h3>
+                            <div class="table-actions">
+                                <input type="text" id="bookSearchInput" placeholder="Search books..."
+                                    onkeyup="searchBooksTable()">
+                                <select id="bookCategoryFilter" onchange="filterBooksTable()">
+                                    <option value="">All Categories</option>
                                     <option value="computer-science">Computer Science</option>
                                     <option value="mathematics">Mathematics</option>
                                     <option value="physics">Physics</option>
                                     <option value="literature">Literature</option>
                                     <option value="history">History</option>
                                     <option value="biology">Biology</option>
-                                </select></div><button type="submit" class="btn-primary">Add Book</button>
-                        </form>
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>ISBN</th>
-                                    <th>Category</th>
-                                    <th>Available</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="booksTable"></tbody>
-                        </table>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>ISBN</th>
+                                        <th>Category</th>
+                                        <th>Available</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="booksTable"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
-                <section id="users">
-                    <h2>Manage Users</h2>
+
+                <!-- Manage Students Section -->
+                <section id="students">
+                    <h2><i class="fas fa-user-graduate"></i> Manage Students</h2>
+
+                    <!-- Add Student Form -->
                     <div class="form-container">
-                        <h3>Add New Student</h3>
+                        <div class="form-header">
+                            <h3><i class="fas fa-user-plus"></i> Add New Student</h3>
+                            <p>Register new students to the library system</p>
+                        </div>
                         <form id="addStudentForm">
-                            <div class="form-grid"><input type="text" id="studentId" placeholder="Student ID"
-                                    required><input type="text" id="studentName" placeholder="Full Name" required><input
-                                    type="email" id="studentEmail" placeholder="Email" required><select
-                                    id="studentCourse">
-                                    <option>Computer Science</option>
-                                    <option>Information Technology</option>
-                                    <option>Mathematics</option>
-                                    <option>Physics</option>
-                                </select><select id="studentYear">
-                                    <option>1st Year</option>
-                                    <option>2nd Year</option>
-                                    <option>3rd Year</option>
-                                    <option>4th Year</option>
-                                </select></div><button type="submit" class="btn-primary">Add Student</button>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <i class="fas fa-id-card"></i>
+                                    <input type="text" id="studentId" placeholder="Student ID" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="studentName" placeholder="Full Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="studentEmail" placeholder="Email" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <select id="studentCourse">
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Literature">Literature</option>
+                                        <option value="History">History</option>
+                                        <option value="Biology">Biology</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <select id="studentYear">
+                                        <option value="1st Year">1st Year</option>
+                                        <option value="2nd Year">2nd Year</option>
+                                        <option value="3rd Year">3rd Year</option>
+                                        <option value="4th Year">4th Year</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="text" id="studentPhone" placeholder="Phone (optional)">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-user-plus"></i> Add Student
+                            </button>
                         </form>
                     </div>
+
+                    <!-- Students Table -->
                     <div class="table-container">
-                        <h3>Students</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Course</th>
-                                    <th>Year</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentsTable"></tbody>
-                        </table>
+                        <div class="table-header">
+                            <h3><i class="fas fa-users"></i> All Students</h3>
+                            <div class="table-actions">
+                                <input type="text" id="studentSearchInput" placeholder="Search students..."
+                                    onkeyup="searchStudentsTable()">
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Course</th>
+                                        <th>Year</th>
+                                        <th>Books Borrowed</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentsTable"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
-                <section id="transactions">
-                    <h2>All Transactions</h2>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Book</th>
-                                    <th>Borrow Date</th>
-                                    <th>Due Date</th>
-                                    <th>Return Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactionsTable"></tbody>
-                        </table>
-                    </div>
-                </section>
-                <section id="qr">
-                    <h2>Generate QR Code</h2>
+
+                <!-- Manage Faculty Section -->
+                <section id="faculty">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Manage Faculty</h2>
+
+                    <!-- Add Faculty Form -->
                     <div class="form-container">
-                        <div class="form-grid"><select id="qrUserType">
-                                <option value="student">Student</option>
-                                <option value="faculty">Faculty</option>
-                            </select><input type="text" id="qrUserId" placeholder="User ID"><input type="text"
-                                id="qrUserName" placeholder="User Name"></div><button onclick="generateQR()"
-                            class="btn-primary">Generate QR Code</button>
+                        <div class="form-header">
+                            <h3><i class="fas fa-user-plus"></i> Add New Faculty Member</h3>
+                            <p>Register faculty members to the library system</p>
+                        </div>
+                        <form id="addFacultyForm">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <i class="fas fa-id-card"></i>
+                                    <input type="text" id="facultyId" placeholder="Faculty ID" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="facultyName" placeholder="Full Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="facultyEmail" placeholder="Email" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-building"></i>
+                                    <input type="text" id="facultyDepartment" placeholder="Department" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-user-tie"></i>
+                                    <select id="facultyPosition">
+                                        <option value="Professor">Professor</option>
+                                        <option value="Associate Professor">Associate Professor</option>
+                                        <option value="Assistant Professor">Assistant Professor</option>
+                                        <option value="Lecturer">Lecturer</option>
+                                        <option value="Visiting Faculty">Visiting Faculty</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-flask"></i>
+                                    <input type="text" id="facultyResearch" placeholder="Research Area (optional)">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-user-plus"></i> Add Faculty
+                            </button>
+                        </form>
                     </div>
-                    <div id="qrResult" style="display:none;text-align:center;margin-top:2rem">
-                        <div id="qrCodeContainer"></div><button onclick="downloadQR()" class="btn-primary"
-                            style="margin-top:1rem">Download QR</button>
+
+                    <!-- Faculty Table -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3><i class="fas fa-chalkboard-teacher"></i> All Faculty Members</h3>
+                            <div class="table-actions">
+                                <input type="text" id="facultySearchInput" placeholder="Search faculty..."
+                                    onkeyup="searchFacultyTable()">
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                        <th>Position</th>
+                                        <th>Books Borrowed</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="facultyTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Section -->
+                <section id="transactions">
+                    <h2><i class="fas fa-exchange-alt"></i> All Transactions</h2>
+
+                    <div class="transaction-filters">
+                        <div class="filter-group">
+                            <i class="fas fa-filter"></i>
+                            <select id="transactionTypeFilter" onchange="filterTransactions()">
+                                <option value="all">All Transactions</option>
+                                <option value="active">Active Borrowings</option>
+                                <option value="returned">Returned Books</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="transactionSearchInput" placeholder="Search by user or book..."
+                                onkeyup="filterTransactions()">
+                        </div>
+                        <button class="btn-secondary" onclick="exportTransactions()">
+                            <i class="fas fa-download"></i> Export CSV
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                        <th>Book Title</th>
+                                        <th>Borrow Date</th>
+                                        <th>Due Date</th>
+                                        <th>Return Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Generate QR Section -->
+                <section id="qr">
+                    <h2><i class="fas fa-qrcode"></i> Generate QR Code</h2>
+
+                    <div class="qr-container">
+                        <div class="form-container">
+                            <div class="form-header">
+                                <h3><i class="fas fa-qrcode"></i> User QR Code Generator</h3>
+                                <p>Generate QR codes for students and faculty members</p>
+                            </div>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <i class="fas fa-user-tag"></i>
+                                    <select id="qrUserType">
+                                        <option value="student">Student</option>
+                                        <option value="faculty">Faculty</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-id-card"></i>
+                                    <input type="text" id="qrUserId" placeholder="User ID">
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="qrUserName" placeholder="User Name">
+                                </div>
+                            </div>
+                            <button onclick="generateQR()" class="btn-primary">
+                                <i class="fas fa-qrcode"></i> Generate QR Code
+                            </button>
+                        </div>
+
+                        <div id="qrResult" class="qr-result" style="display: none;">
+                            <div class="qr-card">
+                                <div class="qr-header">
+                                    <i class="fas fa-qrcode"></i>
+                                    <h3>QR Code Generated</h3>
+                                </div>
+                                <div id="qrCodeContainer" class="qr-code"></div>
+                                <div class="qr-info" id="qrInfo"></div>
+                                <button onclick="downloadQR()" class="btn-primary">
+                                    <i class="fas fa-download"></i> Download QR Code
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings">
+                    <h2><i class="fas fa-cog"></i> System Settings</h2>
+
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <div class="settings-icon"><i class="fas fa-palette"></i></div>
+                            <h3>Theme Settings</h3>
+                            <p>Customize the appearance of the admin panel</p>
+                            <div class="theme-options">
+                                <button class="theme-option active" data-theme="light"
+                                    onclick="setTheme('light')">Light</button>
+                                <button class="theme-option" data-theme="dark" onclick="setTheme('dark')">Dark</button>
+                                <button class="theme-option" data-theme="auto" onclick="setTheme('auto')">Auto</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-icon"><i class="fas fa-bell"></i></div>
+                            <h3>Notifications</h3>
+                            <p>Configure notification preferences</p>
+                            <div class="toggle-switch">
+                                <label>Email Notifications</label>
+                                <input type="checkbox" id="emailNotifications" checked>
+                            </div>
+                            <div class="toggle-switch">
+                                <label>Due Date Alerts</label>
+                                <input type="checkbox" id="dueDateAlerts" checked>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-icon"><i class="fas fa-database"></i></div>
+                            <h3>Data Management</h3>
+                            <p>Manage system data and backups</p>
+                            <button class="btn-secondary" onclick="backupData()"><i class="fas fa-download"></i> Backup
+                                Data</button>
+                            <button class="btn-secondary" onclick="clearData()"
+                                style="background:var(--danger);color:white"><i class="fas fa-trash"></i> Clear All
+                                Data</button>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-icon"><i class="fas fa-info-circle"></i></div>
+                            <h3>System Info</h3>
+                            <div class="info-item"><span>Version:</span><span>2.0.0</span></div>
+                            <div class="info-item"><span>Last Backup:</span><span id="lastBackup">Never</span></div>
+                            <div class="info-item"><span>Total Users:</span><span id="totalUsers">0</span></div>
+                        </div>
                     </div>
                 </section>
             </main>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/admin.js"></script>
